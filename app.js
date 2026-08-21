@@ -271,7 +271,6 @@ function clearAll() {
 }
 
 // ── PDF ──
-// ── PDF ──
 async function downloadPDF() {
   const btn = document.getElementById('dl-btn');
   btn.disabled = true;
@@ -281,12 +280,12 @@ async function downloadPDF() {
     const el = document.getElementById('quote-paper');
 
     const canvas = await html2canvas(el, {
-      scale: 1.2,
+      scale: 1.0,
       useCORS: true,
       backgroundColor: '#ffffff'
     });
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.75);
+    const imgData = canvas.toDataURL('image/jpeg', 0.6);
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
