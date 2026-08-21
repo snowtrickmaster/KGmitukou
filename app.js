@@ -200,7 +200,7 @@ function renderPreview() {
   });
 
   // 出演料：明細直後に空行を挟んでから、すぐ右下に集計を表示
-  for (let i = performRows.length; i < Math.max(performRows.length + 2, 3); i++) {
+  for (let i = performRows.length; i < Math.max(performRows.length + 1, 2); i++) {
     performHtml += empty();
   }
 
@@ -246,7 +246,7 @@ function renderPreview() {
 
   // 以下余白 → 空行 → 一番右下に総計（①＋②）
   transportHtml += `<tr><td class="left" colspan="${COLS}">以下余白</td></tr>`;
-  for (let i = 0; i < 5; i++) transportHtml += empty();
+  for (let i = 0; i < 2; i++) transportHtml += empty();
 
   const grand = performGrand + transportSubtotal;
   transportHtml += ftRow('総計（①＋②）', `¥${grand.toLocaleString()}`, 'ft-grand');
