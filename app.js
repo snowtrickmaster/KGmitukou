@@ -280,12 +280,12 @@ async function downloadPDF() {
     const el = document.getElementById('quote-paper');
 
     const canvas = await html2canvas(el, {
-      scale: 1.2,
+      scale: 1.5,
       useCORS: true,
       backgroundColor: '#ffffff'
     });
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.85);
+    const imgData = canvas.toDataURL('image/png', 0.95);
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
@@ -297,7 +297,7 @@ async function downloadPDF() {
     let h = w / ratio;
     if (h > pageH - 10) { h = pageH - 10; w = h * ratio; }
 
-    pdf.addImage(imgData, 'JPEG', (pageW - w) / 2, 5, w, h);
+    pdf.addImage(imgData, 'PNG', (pageW - w) / 2, 5, w, h);
 
     const project = document.getElementById('project')?.value || '見積書';
     pdf.save(`${project}_見積書（出演料＋交通費）.pdf`);
