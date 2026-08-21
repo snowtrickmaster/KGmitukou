@@ -275,24 +275,36 @@ async function downloadPDF() {
   const btn = document.getElementById('dl-btn');
   btn.disabled = true;
   btn.textContent = '生成中...';
+
   try {
     const el = document.getElementById('quote-paper');
-    const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-    const imgData = canvas.toDataURL('image/png');
+
+    const canvas = await html2canvas(el, {
+      scale: 1.5,
+      useCORS: true,
+      backgroundColor: '#ffffff'
+    });
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.85);
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
     const ratio = canvas.width / canvas.height;
     let w = pageW - 10;
     let h = w / ratio;
     if (h > pageH - 10) { h = pageH - 10; w = h * ratio; }
-    pdf.addImage(imgData, 'PNG', (pageW - w) / 2, 5, w, h);
+
+    pdf.addImage(imgData, 'JPEG', (pageW - w) / 2, 5, w, h);
+
     const project = document.getElementById('project')?.value || '見積書';
     pdf.save(`${project}_見積書（出演料＋交通費）.pdf`);
-  } catch(e) {
+  } catch (e) {
     alert('PDF生成に失敗しました: ' + e.message);
   }
+
   btn.disabled = false;
   btn.textContent = '↓ PDFをダウンロード';
 }
