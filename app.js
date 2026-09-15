@@ -280,7 +280,7 @@ async function downloadPDF() {
     const el = document.getElementById('quote-paper');
 
     const canvas = await html2canvas(el, {
-      scale: 1.0,
+      scale: 0.9,
       useCORS: true,
       backgroundColor: '#ffffff'
     });
