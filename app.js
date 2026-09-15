@@ -285,7 +285,7 @@ async function downloadPDF() {
       backgroundColor: '#ffffff'
     });
 
-    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+    const imgData = canvas.toDataURL('image/jpeg', 1.00);
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
